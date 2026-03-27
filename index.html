@@ -1,57 +1,1056 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Immertrust</title>
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: #121212;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Immertrust — Cybersecurity Experts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Karla:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    :root {
+      --bg:           #0a0a0a;
+      --surface:      #141414;
+      --surface2:     #1f1f1f;
+      --border:       #2e2e2e;
+      --border2:      #3e3e3e;
+      --accent:       #ffffff;
+      --accent-hover: #e5e5e5;
+      --text:         #e2e2e2;
+      --muted:        #8a8a8a;
+      --heading:      #ffffff;
+      --text-white:   #ffffff;
+      --text-gray:    #a0a0a0;
+      --ff-head:      'Chakra Petch', sans-serif;
+      --ff-body:      'Karla', sans-serif;
+    }
 
-  .logo {
-    width: 50%;
-	max-width: 744px;
-  }
+    html { scroll-behavior: smooth; }
 
-  footer {
-    text-align: center;
-    font-size: 0.8em;
-    padding: 35px 0;
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-body);
+      font-weight: 400;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
 
-  footer a {
-    color: #999999;
-    text-decoration: none;
-  }
+    /* ── SCROLLBAR ─────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-  footer a:hover {
-    text-decoration: underline;
-  }
-</style>
+    /* ── GRID TEXTURE ─────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ───────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: padding .3s;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .nav-logo svg {
+      width: 32px;
+      height: auto;
+      color: #ffffff;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
+    }
+
+    .nav-logo-text {
+      font-family: var(--ff-head);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--heading);
+      letter-spacing: 0.06em;
+    }
+
+    .nav-logo-text span { color: var(--text-gray); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--ff-head);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--text-white); }
+
+    .nav-cta {
+      font-family: var(--ff-head);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg) !important;
+      background: var(--accent);
+      padding: 8px 20px;
+      border-radius: 2px;
+      transition: background .2s, box-shadow .2s !important;
+    }
+    .nav-cta:hover {
+      background: var(--accent-hover) !important;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3) !important;
+      color: var(--bg) !important;
+    }
+
+    /* ── HERO ──────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 24px 80px;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      bottom: 10%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.03) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-family: var(--ff-head);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-gray);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 6px 16px;
+      border-radius: 2px;
+      margin-bottom: 32px;
+      display: inline-block;
+      animation: fadeUp .8s ease both;
+    }
+
+    .hero-logo {
+      width: 90px;
+      margin-bottom: 28px;
+      filter: drop-shadow(0 0 18px rgba(255,255,255,0.4));
+      animation: fadeUp .8s .1s ease both;
+    }
+
+    .hero-title {
+      font-family: var(--ff-head);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      color: var(--heading);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+      animation: fadeUp .8s .2s ease both;
+    }
+
+    .hero-title .accent { color: var(--text-gray); }
+    .hero-title .block { display: block; }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+      animation: fadeUp .8s .3s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp .8s .4s ease both;
+    }
+
+    .btn-primary {
+      font-family: var(--ff-head);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 14px 32px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background .2s, box-shadow .2s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 0 30px rgba(255,255,255,0.3);
+    }
+
+    .btn-secondary {
+      font-family: var(--ff-head);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      border: 1px solid var(--border2);
+      padding: 14px 32px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--text-white);
+      color: var(--text-white);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUp .8s .7s ease both;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* ── STATS BAR ─────────────────────────────────── */
+    .stats-bar {
+      position: relative;
+      z-index: 1;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s, transform .6s;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item.visible { opacity: 1; transform: translateY(0); }
+
+    .stat-num {
+      font-family: var(--ff-head);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--text-white);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* ── SECTION BASE ──────────────────────────────── */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 100px 48px;
+    }
+
+    .section-tag {
+      font-family: var(--ff-head);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-gray);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--text-gray);
+    }
+
+    .section-title {
+      font-family: var(--ff-head);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--heading);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .section-body {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    /* ── ABOUT ─────────────────────────────────────── */
+    #about { background: var(--bg); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-frame {
+      border: 1px solid var(--border);
+      padding: 40px;
+      background: var(--surface);
+      position: relative;
+    }
+
+    .about-frame::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 40px; height: 40px;
+      border-top: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+    }
+
+    .about-frame::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; right: -1px;
+      width: 40px; height: 40px;
+      border-bottom: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+    }
+
+    .coverage-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .coverage-list li {
+      font-family: var(--ff-head);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .coverage-list li::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(255,255,255,0.5);
+    }
+
+    .coverage-label {
+      font-family: var(--ff-head);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── SERVICES ──────────────────────────────────── */
+    #services { background: var(--surface); }
+
+    .services-header {
+      margin-bottom: 64px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .service-card {
+      background: var(--surface);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s, transform .6s, background .3s;
+    }
+    .service-card.visible { opacity: 1; transform: translateY(0); }
+    .service-card:nth-child(2) { transition-delay: .1s; }
+    .service-card:nth-child(3) { transition-delay: .2s; }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--border2);
+      transition: background .3s;
+    }
+
+    .service-card:hover { background: var(--surface2); }
+    .service-card:hover::before { background: var(--accent); }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 28px;
+      color: var(--accent);
+    }
+
+    .service-num {
+      font-family: var(--ff-head);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .service-title {
+      font-family: var(--ff-head);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--heading);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .service-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-points li {
+      font-size: 0.85rem;
+      color: var(--text);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .service-points li::before {
+      content: '→';
+      color: var(--text-gray);
+      font-family: var(--ff-head);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── TRUST BAND ────────────────────────────────── */
+    .trust-band {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 48px;
+      text-align: center;
+    }
+
+    .trust-band p {
+      font-family: var(--ff-head);
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      font-weight: 600;
+      color: var(--heading);
+      max-width: 820px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    .trust-band p span { color: var(--text-white); }
+
+    /* ── CONTACT ───────────────────────────────────── */
+    #contact { background: var(--surface); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .contact-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .contact-item-label {
+      font-family: var(--ff-head);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .contact-item-value {
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .contact-item-value:hover { color: var(--text-white); }
+
+    .contact-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 48px;
+      position: relative;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 32px; height: 32px;
+      border-top: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+    }
+
+    .contact-card .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .contact-card .section-body {
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+
+    .contact-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-link {
+      font-family: var(--ff-head);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 14px 28px;
+      text-decoration: none;
+      text-align: center;
+      border-radius: 2px;
+      transition: background .2s, box-shadow .2s;
+    }
+    .contact-link:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 0 24px rgba(255,255,255,0.25);
+    }
+
+    /* ── FOOTER ────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-brand svg {
+      width: 24px;
+      height: auto;
+      opacity: 0.7;
+    }
+
+    .footer-brand-name {
+      font-family: var(--ff-head);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: var(--ff-head);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--text-white); }
+
+    /* ── REVEAL ANIMATION ──────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ── KEYFRAMES ─────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      50%       { opacity: 0.3; transform: scaleY(0.7); }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.6; }
+      50%       { opacity: 1; }
+    }
+
+    /* ── MOBILE ────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .section-inner { padding: 70px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .stats-bar { grid-template-columns: 1fr; gap: 24px; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+      .stat-item:last-child { border-bottom: none; }
+      footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+      .trust-band { padding: 48px 24px; }
+    }
+  </style>
 </head>
 <body>
-  <div class="main">
-    <img class="logo" src="immertrust.png" alt="Immertrust">
+
+  <nav>
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 1936 2180" xmlns="http://www.w3.org/2000/svg">
+        <path transform="translate(445,304)" d="m0 0h27l13 3 16 8 10 7 10 9 8 11 6 13 4 15 1 16v434l252 1 15 3 16 6 10 6 13 11 10 11 7 14 4 14 1 6v13l-4 15-6 14-10 14-7 7-14 9-16 7-15 4-32 1h-608v196l9 1h286l20 4 16 7 12 9 9 9 9 13 6 14 4 17v14l-5 22-7 16-11 15-9 9-13 8-15 6-11 3-300 1v83h296l16 2 12 5 12 7 12 11 10 13 8 17 5 20v17l-4 15-7 16-7 10-7 8-8 7-14 8-13 5-11 3-300 1v83h296l16 2 12 5 12 7 12 11 10 13 8 17 5 20v14l-4 17-5 12-10 16-9 10-10 7-16 8-18 5-299 1v3l-4-1v-2l-22 1h-8l-17 4-6 2-14 2h-10l-17-3-16-7-11-7-11-10-8-11-7-14-3-9-2-3v-889l3-8 5-13 9-15 12-13 15-11 14-6 18-5 299-1 4-1 1-448 5-18 7-14 10-12h2l2-4 11-8 14-7z" fill="currentColor"/>
+        <path transform="translate(1466,304)" d="m0 0h17l14 3 12 5 11 6 12 9 9 9 8 14 6 15 1 6v449l300 1 16 4 17 8 11 8 10 8v2h2l11 15 8 17 3 11h2v642l-2-1-4 18-7 14-8 11-9 9-12 7-21 7-9 2h-23l-34-11-11-3h-15l-9-1-294-1-21-7-15-9-13-12-7-10-6-10-7-21-1-4v-12l6-25 8-16 7-9 11-12 13-9 15-6 14-2h297v-83l-301-1-18-6-13-7-10-8-7-7-9-13-6-13-4-15-3-12v-11l5-20 4-9 7-12 19-19 15-8 22-6 9-1h286l4-1v-195h-623l-19-1-20-7-16-10-9-8v-2h-2l-9-14-6-14-3-10v-21l4-16 8-16 10-13 8-6 11-7 12-6 14-4 6-1h231l19-1 1-439 5-21 4-9 6-11 9-11 10-9 11-7 13-5z" fill="currentColor"/>
+        <path transform="translate(1847,1656)" d="m0 0h12l14 2 14 5 14 8 13 11 10 14 6 14 2 9 1 15v349l-1 17-2 11-5 13-6 11-8 11-14 14-14 8-13 6-15 4-1 2h-719l-3-3-17-7-11-7-12-11-7-10-8-16-4-14v-18l5-17 6-11 4-5 3-6 5-6 10-8 15-8 12-4 17-2 619-1 10-2 1-6v-144l-1-38-301-1-21-7-14-8-13-12-9-12-7-14-6-20v-15l6-22 8-16 7-9 11-12 13-9 15-6 14-2 317-1 15-5 13-5 10-3z" fill="currentColor"/>
+        <path transform="translate(855,1153)" d="m0 0h165l60 1 16 2 13 4 17 9 16 12 11 14 9 16 5 13 4 18v21l-5 21-5 12-7 12-8 11-4 5-10 8-13 8-14 7-14 4-34 3-1 36v134l-1 248-5 16-5 12-7 11-9 10-10 8-14 8-18 6-8 1h-32l-12-3-14-6-10-7-10-9-7-7-9-14-5-11-4-15-1-52-1-364-2-2-29-2-14-3-16-7-11-7-15-14-3-3v-2h-2l-10-14-5-11-6-18-1-4v-30l5-17 7-17 14-21h2l2-4 13-10 18-10 13-4z" fill="currentColor"/>
+        <path transform="translate(77,1899)" d="m0 0 19 2 13 5 13 7 9 7 8 8 7 11 6 13 3 12 1 63h637l17 3 10 4 13 8 15 14 7 10 6 13 2 7 1 9v11l-2 12-5 14-8 14-8 10-14 10-16 8-12 4h-3v2h-726v-2l-18-6-13-7-10-8-8-7-9-12-7-14-3-12-2-1v-147l3-8 5-14 7-11 9-11 9-8 15-8 9-3z" fill="currentColor"/>
+        <path transform="translate(774,8)" d="m0 0h16l15 3 15 6 14 8 12 11 8 9 6 10 5 14 3 14v10l-5 21-10 19-11 12-11 9-10 7-26 15-18 10-17 10-49 28-20 11-18 10-19 10-19 7-22 5h-8l-25-5-21-11-13-11-8-9-7-12-5-14-2-7v-21l4-14 8-16 9-10 11-11 25-15 36-20 24-14 16-9 41-24 23-13 25-14 12-5z" fill="currentColor"/>
+        <path transform="translate(1149)" d="m0 0h2v2l14 1 15 4 20 10 18 10 50 28 24 14 25 14 21 12 17 10 13 9 16 16 8 14 4 11 1 5v21l-2 16-4 11-8 14-11 12-10 7-19 9-16 4-2 1-10 1-13-2-12-3-20-9-16-9-27-15-23-13-29-16-25-14-24-14-14-8-14-10-10-6-9-7-15-3-10v-30l4-14 10-19 6-7h2v-2l8-7 10-7 12-6 15-4 9-1z" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">Immer<span>trust</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+
+    <div class="hero-label">Cybersecurity Experts</div>
+
+    <svg class="hero-logo" viewBox="0 0 1936 2180" xmlns="http://www.w3.org/2000/svg">
+      <path transform="translate(445,304)" d="m0 0h27l13 3 16 8 10 7 10 9 8 11 6 13 4 15 1 16v434l252 1 15 3 16 6 10 6 13 11 10 11 7 14 4 14 1 6v13l-4 15-6 14-10 14-7 7-14 9-16 7-15 4-32 1h-608v196l9 1h286l20 4 16 7 12 9 9 9 9 13 6 14 4 17v14l-5 22-7 16-11 15-9 9-13 8-15 6-11 3-300 1v83h296l16 2 12 5 12 7 12 11 10 13 8 17 5 20v17l-4 15-7 16-7 10-7 8-8 7-14 8-13 5-11 3-300 1v83h296l16 2 12 5 12 7 12 11 10 13 8 17 5 20v14l-4 17-5 12-10 16-9 10-10 7-16 8-18 5-299 1v3l-4-1v-2l-22 1h-8l-17 4-6 2-14 2h-10l-17-3-16-7-11-7-11-10-8-11-7-14-3-9-2-3v-889l3-8 5-13 9-15 12-13 15-11 14-6 18-5 299-1 4-1 1-448 5-18 7-14 10-12h2l2-4 11-8 14-7z" fill="#ffffff"/>
+      <path transform="translate(1466,304)" d="m0 0h17l14 3 12 5 11 6 12 9 9 9 8 14 6 15 1 6v449l300 1 16 4 17 8 11 8 10 8v2h2l11 15 8 17 3 11h2v642l-2-1-4 18-7 14-8 11-9 9-12 7-21 7-9 2h-23l-34-11-11-3h-15l-9-1-294-1-21-7-15-9-13-12-7-10-6-10-7-21-1-4v-12l6-25 8-16 7-9 11-12 13-9 15-6 14-2h297v-83l-301-1-18-6-13-7-10-8-7-7-9-13-6-13-4-15-3-12v-11l5-20 4-9 7-12 19-19 15-8 22-6 9-1h286l4-1v-195h-623l-19-1-20-7-16-10-9-8v-2h-2l-9-14-6-14-3-10v-21l4-16 8-16 10-13 8-6 11-7 12-6 14-4 6-1h231l19-1 1-439 5-21 4-9 6-11 9-11 10-9 11-7 13-5z" fill="#ffffff"/>
+      <path transform="translate(1847,1656)" d="m0 0h12l14 2 14 5 14 8 13 11 10 14 6 14 2 9 1 15v349l-1 17-2 11-5 13-6 11-8 11-14 14-14 8-13 6-15 4-1 2h-719l-3-3-17-7-11-7-12-11-7-10-8-16-4-14v-18l5-17 6-11 4-5 3-6 5-6 10-8 15-8 12-4 17-2 619-1 10-2 1-6v-144l-1-38-301-1-21-7-14-8-13-12-9-12-7-14-6-20v-15l6-22 8-16 7-9 11-12 13-9 15-6 14-2 317-1 15-5 13-5 10-3z" fill="#ffffff"/>
+      <path transform="translate(855,1153)" d="m0 0h165l60 1 16 2 13 4 17 9 16 12 11 14 9 16 5 13 4 18v21l-5 21-5 12-7 12-8 11-4 5-10 8-13 8-14 7-14 4-34 3-1 36v134l-1 248-5 16-5 12-7 11-9 10-10 8-14 8-18 6-8 1h-32l-12-3-14-6-10-7-10-9-7-7-9-14-5-11-4-15-1-52-1-364-2-2-29-2-14-3-16-7-11-7-15-14-3-3v-2h-2l-10-14-5-11-6-18-1-4v-30l5-17 7-17 14-21h2l2-4 13-10 18-10 13-4z" fill="#ffffff"/>
+      <path transform="translate(77,1899)" d="m0 0 19 2 13 5 13 7 9 7 8 8 7 11 6 13 3 12 1 63h637l17 3 10 4 13 8 15 14 7 10 6 13 2 7 1 9v11l-2 12-5 14-8 14-8 10-14 10-16 8-12 4h-3v2h-726v-2l-18-6-13-7-10-8-8-7-9-12-7-14-3-12-2-1v-147l3-8 5-14 7-11 9-11 9-8 15-8 9-3z" fill="#ffffff"/>
+      <path transform="translate(774,8)" d="m0 0h16l15 3 15 6 14 8 12 11 8 9 6 10 5 14 3 14v10l-5 21-10 19-11 12-11 9-10 7-26 15-18 10-17 10-49 28-20 11-18 10-19 10-19 7-22 5h-8l-25-5-21-11-13-11-8-9-7-12-5-14-2-7v-21l4-14 8-16 9-10 11-11 25-15 36-20 24-14 16-9 41-24 23-13 25-14 12-5z" fill="#ffffff"/>
+      <path transform="translate(1149)" d="m0 0h2v2l14 1 15 4 20 10 18 10 50 28 24 14 25 14 21 12 17 10 13 9 16 16 8 14 4 11 1 5v21l-2 16-4 11-8 14-11 12-10 7-19 9-16 4-2 1-10 1-13-2-12-3-20-9-16-9-27-15-23-13-29-16-25-14-24-14-14-8-14-10-10-10-6-9-7-15-3-10v-30l4-14 10-19 6-7h2v-2l8-7 10-7 12-6 15-4 9-1z" fill="#ffffff"/>
+    </svg>
+
+    <h1 class="hero-title">
+      Security That<br>
+      <span class="accent">Evolves With You</span>
+    </h1>
+
+    <p class="hero-sub">
+      Cybersecurity experts specializing in digital transformation, rigorous penetration testing, and device security — so you can innovate rapidly without compromise.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">Explore Services</a>
+      <a href="#contact" class="btn-secondary">Talk to an Expert</a>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <div class="section-tag reveal">Who We Are</div>
+          <h2 class="section-title reveal reveal-delay-1">An Extension of Your Team</h2>
+          <p class="section-body reveal reveal-delay-2">
+            Our information security experts act as an extension of your team so your business can continue to innovate rapidly without compromising the safety of your product or the data of your customers.
+          </p>
+          <br>
+          <p class="section-body reveal reveal-delay-2">
+            We help organizations protect their reputation, build trust with customers, and launch secure products on time.
+          </p>
+        </div>
+        <div class="about-visual reveal reveal-delay-1">
+          <div class="about-frame">
+            <div class="coverage-label">Assessment Coverage</div>
+            <ul class="coverage-list">
+              <li>Web Applications and APIs</li>
+              <li>Cloud Infrastructure</li>
+              <li>Mobile Applications</li>
+              <li>Internal & External Networks</li>
+              <li>IoT & Embedded Systems</li>
+              <li>Mobile Devices</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="section-inner">
+      <div class="services-header">
+        <div class="section-tag reveal">What We Do</div>
+        <h2 class="section-title reveal reveal-delay-1">Security Solutions</h2>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-num">01 — Security Testing</div>
+          <h3 class="service-title">Find Flaws Before Attackers Do</h3>
+          <p class="service-desc">
+          </p>
+          <ul class="service-points">
+            <li>Proactively find flaws before they are exposed or exploited</li>
+            <li>Hardware and software “full stack” penetration testing</li>
+            <li>Custom tooling for regression testing</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">02 — Security Strategy</div>
+          <h3 class="service-title">Understand Your Security Posture</h3>
+          <p class="service-desc">
+          </p>
+          <ul class="service-points">
+            <li>Provide a real-world picture of security maturity</li>
+            <li>Track security progress over time and communicate to senior leadership</li>
+            <li>Strategic advisory from information security experts</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">03 — Security Engineering</div>
+          <h3 class="service-title">Security Built Into Your Culture</h3>
+          <p class="service-desc">
+          </p>
+          <ul class="service-points">
+            <li>Remove reliance on penetration testing</li>
+            <li>Build a culture of security into your software engineering practices</li>
+            <li>Predict and prevent security issues with threat modeling</li>
+            <li>Deliver your software faster</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="trust-band">
+    <p class="reveal">
+      Protect your <span>reputation</span>, build <span>trust with customers</span>, and launch <span>secure products on time</span> — without slowing your team down.
+    </p>
   </div>
+
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div>
+          <div class="section-tag reveal">Get in Touch</div>
+          <h2 class="section-title reveal reveal-delay-1">Ready to Secure<br>Your Business?</h2>
+          <p class="section-body reveal reveal-delay-2">
+            Reach out and one of our information security experts will get back to you to discuss your organization's specific needs.
+          </p>
+          <div class="contact-info" style="margin-top: 40px;">
+            <div class="contact-item reveal reveal-delay-1">
+              <div class="contact-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="m2 7 10 6 10-6"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Email</div>
+                <a href="mailto:info@immertrust.com" class="contact-item-value">info@immertrust.com</a>
+              </div>
+            </div>
+            <div class="contact-item reveal reveal-delay-2">
+              <div class="contact-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 14 19.79 19.79 0 0 1 1 5.26 2 2 0 0 1 2.95 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 18z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Phone</div>
+                <a href="tel:+18889961337" class="contact-item-value">+1 (888) 996-1337</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-card reveal reveal-delay-1">
+          <div class="section-title">Start a Conversation</div>
+          <p class="section-body">
+            Whether you're launching a new product, scaling your infrastructure, or dealing with an urgent security concern — we're here to help.
+          </p>
+          <div class="contact-ctas">
+            <a href="mailto:info@immertrust.com" class="contact-link">Email Us</a>
+            <a href="tel:+18889961337" class="btn-secondary" style="text-align:center; display:block; padding:14px 28px; font-family: var(--ff-head); font-size: 0.8rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; border-radius:2px;">
+              Call +1 (888) 996-1337
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    A <a href="https://deltabloom.com/" target="_blank" rel="noopener noreferrer">Delta Bloom Technologies</a> product.
-    <br />
-    <br />
-    Email <a href="mailto:info@immertrust.com">info@immertrust.com</a> for pricing.
+    <div class="footer-brand">
+      <svg viewBox="0 0 1936 2180" xmlns="http://www.w3.org/2000/svg">
+        <path transform="translate(445,304)" d="m0 0h27l13 3 16 8 10 7 10 9 8 11 6 13 4 15 1 16v434l252 1 15 3 16 6 10 6 13 11 10 11 7 14 4 14 1 6v13l-4 15-6 14-10 14-7 7-14 9-16 7-15 4-32 1h-608v196l9 1h286l20 4 16 7 12 9 9 9 9 13 6 14 4 17v14l-5 22-7 16-11 15-9 9-13 8-15 6-11 3-300 1v83h296l16 2 12 5 12 7 12 11 10 13 8 17 5 20v17l-4 15-7 16-7 10-7 8-8 7-14 8-13 5-11 3-300 1v83h296l16 2 12 5 12 7 12 11 10 13 8 17 5 20v14l-4 17-5 12-10 16-9 10-10 7-16 8-18 5-299 1v3l-4-1v-2l-22 1h-8l-17 4-6 2-14 2h-10l-17-3-16-7-11-7-11-10-8-11-7-14-3-9-2-3v-889l3-8 5-13 9-15 12-13 15-11 14-6 18-5 299-1 4-1 1-448 5-18 7-14 10-12h2l2-4 11-8 14-7z" fill="#8a8a8a"/>
+        <path transform="translate(1466,304)" d="m0 0h17l14 3 12 5 11 6 12 9 9 9 8 14 6 15 1 6v449l300 1 16 4 17 8 11 8 10 8v2h2l11 15 8 17 3 11h2v642l-2-1-4 18-7 14-8 11-9 9-12 7-21 7-9 2h-23l-34-11-11-3h-15l-9-1-294-1-21-7-15-9-13-12-7-10-6-10-7-21-1-4v-12l6-25 8-16 7-9 11-12 13-9 15-6 14-2h297v-83l-301-1-18-6-13-7-10-8-7-7-9-13-6-13-4-15-3-12v-11l5-20 4-9 7-12 19-19 15-8 22-6 9-1h286l4-1v-195h-623l-19-1-20-7-16-10-9-8v-2h-2l-9-14-6-14-3-10v-21l4-16 8-16 10-13 8-6 11-7 12-6 14-4 6-1h231l19-1 1-439 5-21 4-9 6-11 9-11 10-9 11-7 13-5z" fill="#8a8a8a"/>
+        <path transform="translate(1847,1656)" d="m0 0h12l14 2 14 5 14 8 13 11 10 14 6 14 2 9 1 15v349l-1 17-2 11-5 13-6 11-8 11-14 14-14 8-13 6-15 4-1 2h-719l-3-3-17-7-11-7-12-11-7-10-8-16-4-14v-18l5-17 6-11 4-5 3-6 5-6 10-8 15-8 12-4 17-2 619-1 10-2 1-6v-144l-1-38-301-1-21-7-14-8-13-12-9-12-7-14-6-20v-15l6-22 8-16 7-9 11-12 13-9 15-6 14-2 317-1 15-5 13-5 10-3z" fill="#8a8a8a"/>
+        <path transform="translate(855,1153)" d="m0 0h165l60 1 16 2 13 4 17 9 16 12 11 14 9 16 5 13 4 18v21l-5 21-5 12-7 12-8 11-4 5-10 8-13 8-14 7-14 4-34 3-1 36v134l-1 248-5 16-5 12-7 11-9 10-10 8-14 8-18 6-8 1h-32l-12-3-14-6-10-7-10-9-7-7-9-14-5-11-4-15-1-52-1-364-2-2-29-2-14-3-16-7-11-7-15-14-3-3v-2h-2l-10-14-5-11-6-18-1-4v-30l5-17 7-17 14-21h2l2-4 13-10 18-10 13-4z" fill="#8a8a8a"/>
+        <path transform="translate(77,1899)" d="m0 0 19 2 13 5 13 7 9 7 8 8 7 11 6 13 3 12 1 63h637l17 3 10 4 13 8 15 14 7 10 6 13 2 7 1 9v11l-2 12-5 14-8 14-8 10-14 10-16 8-12 4h-3v2h-726v-2l-18-6-13-7-10-8-8-7-9-12-7-14-3-12-2-1v-147l3-8 5-14 7-11 9-11 9-8 15-8 9-3z" fill="#8a8a8a"/>
+        <path transform="translate(774,8)" d="m0 0h16l15 3 15 6 14 8 12 11 8 9 6 10 5 14 3 14v10l-5 21-10 19-11 12-11 9-10 7-26 15-18 10-17 10-49 28-20 11-18 10-19 10-19 7-22 5h-8l-25-5-21-11-13-11-8-9-7-12-5-14-2-7v-21l4-14 8-16 9-10 11-11 25-15 36-20 24-14 16-9 41-24 23-13 25-14 12-5z" fill="#8a8a8a"/>
+        <path transform="translate(1149)" d="m0 0h2v2l14 1 15 4 20 10 18 10 50 28 24 14 25 14 21 12 17 10 13 9 16 16 8 14 4 11 1 5v21l-2 16-4 11-8 14-11 12-10 7-19 9-16 4-2 1-10 1-13-2-12-3-20-9-16-9-27-15-23-13-29-16-25-14-24-14-14-8-14-10-10-10-6-9-7-15-3-10v-30l4-14 10-19 6-7h2v-2l8-7 10-7 12-6 15-4 9-1z" fill="#8a8a8a"/>
+      </svg>
+      <span class="footer-brand-name">IMMERTRUST</span>
+    </div>
+    <p class="footer-copy">&copy; 2026 Delta Bloom Technologies LLC. All rights reserved. Immertrust is the marketing name used by Delta Bloom Technologies LLC to market its cybersecurity products and services.</p>
+    <ul class="footer-links">
+    </ul>
   </footer>
+
+  <script>
+    // Intersection Observer for scroll reveals
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .stat-item, .service-card').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Nav shrink on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.padding = window.scrollY > 60 ? '12px 48px' : '18px 48px';
+    });
+
+    // --- QR Code Security Modal Logic ---
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('qr') == 'WINNER' || urlParams.get('qr') == 'winner') {
+        
+        const modalOverlay = document.createElement('div');
+        modalOverlay.id = 'qr-modal-overlay';
+        modalOverlay.style.cssText = 'position: fixed; inset: 0; background: rgba(10,10,10,0.85); backdrop-filter: blur(8px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; transition: opacity 0.4s ease;';
+
+        const modalContainer = document.createElement('div');
+        modalContainer.style.cssText = 'background: var(--surface); border: 1px solid var(--border); padding: 48px 40px; max-width: 640px; width: 100%; position: relative; transform: translateY(24px); transition: transform 0.4s ease; box-shadow: 0 10px 40px rgba(0,0,0,0.5);';
+
+        modalContainer.innerHTML = `
+          <button id="close-modal-x" style="position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--muted); font-size: 1.8rem; cursor: pointer; transition: color 0.2s;">&times;</button>
+          
+          <div class="section-tag" style="margin-bottom: 12px;">Security Notice</div>
+          <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 24px;">The Quishing Threat</h2>
+          
+          <div class="section-body" style="max-width: 100%; margin-bottom: 24px; font-size: 0.95rem; max-height: 50vh; overflow-y: auto; padding-right: 16px;">
+            <p style="margin-bottom: 16px;">You just scanned a QR code on a business card to read this, and while this specific scan safely connected us, the simple act of pointing your phone's camera at a patterned square is becoming an increasingly dangerous gamble. Cybercriminals have aggressively weaponized this everyday convenience into a tactic known as "quishing" (QR phishing), purposefully designing attacks to bypass corporate security filters by targeting your personal mobile device.</p>
+            
+            <p style="margin-bottom: 16px;">The reality of this threat is startling: in 2025, QR code phishing attacks jumped by 25%, with malicious QR codes accounting for 12% of all phishing attacks and security researchers logging a fivefold surge in overall incidents. Even more alarming, 68% of these quishing campaigns specifically targeted mobile users whose phones often lack the robust, enterprise-grade endpoint security found on corporate networks.</p>
+            
+            <p>Whether a malicious code is digitally embedded in a fake document or physically placed as a fraudulent sticker over a legitimate code, a single unverified scan can instantly redirect you to a highly realistic, spoofed website built to quietly harvest your login credentials or deploy malware. Immertrust can help reduce malicious scanning of QR codes by employees through corporate training and network hardening.</p>
+          </div>
+          
+          <button id="close-modal-btn" class="btn-primary" style="width: 100%; border: none; cursor: pointer;">Learn more about Immertrust</button>
+        `;
+
+        modalOverlay.appendChild(modalContainer);
+        document.body.appendChild(modalOverlay);
+
+        requestAnimationFrame(() => {
+          modalOverlay.style.opacity = '1';
+          modalContainer.style.transform = 'translateY(0)';
+        });
+
+        const closeModal = () => {
+          modalOverlay.style.opacity = '0';
+          modalContainer.style.transform = 'translateY(24px)';
+          setTimeout(() => modalOverlay.remove(), 400);
+          
+          const url = new URL(window.location);
+          url.searchParams.delete('qr');
+          window.history.replaceState({}, '', url);
+        };
+
+        document.getElementById('close-modal-x').addEventListener('click', closeModal);
+        document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+        
+        const xBtn = document.getElementById('close-modal-x');
+        xBtn.addEventListener('mouseover', function() { this.style.color = 'var(--text-white)'; });
+        xBtn.addEventListener('mouseout', function() { this.style.color = 'var(--muted)'; });
+      }
+    });
+  </script>
 </body>
 </html>
